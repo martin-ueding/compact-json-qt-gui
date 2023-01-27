@@ -5,6 +5,9 @@ description = "Qt GUI for JSON formatting with compact-json"
 authors = ["Martin Ueding <mu@martin-ueding.de>"]
 license = "MIT"
 
+[tool.poetry.scripts]
+compact-json-qt-gui = "compact_json_qt_gui.__main__:main"
+
 [tool.poetry.dependencies]
 python = "^3.10,<3.12"
 PySide6 = "^6.4.2"

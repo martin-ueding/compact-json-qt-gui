@@ -1,10 +1,7 @@
 import json
-import tempfile
-import subprocess
 import sys
 
 import compact_json
-
 from PySide6.QtWidgets import QMainWindow, QApplication, QPushButton, QVBoxLayout, QWidget
 from PySide6.QtWidgets import QPlainTextEdit
 
@@ -19,38 +16,19 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)
         layout = QVBoxLayout()
         self.widget.setLayout(layout)
-        self.text_edit = QPlainTextEdit("def format_me(): print('Please!')")
+        self.text_edit = QPlainTextEdit('{"Hello": ["This", "is"], "some": "sample", "input": ["which", "you", "can", "format", "by", "clicking"]}')
         self.button = QPushButton("Format")
         layout.addWidget(self.text_edit)
         layout.addWidget(self.button)
         self.button.clicked.connect(self.format_text)
 
-    def format_text(self) -> None:
-        text = self.text_edit.toPlainText()
-        text = json.dumps(json.loads(text), sort_keys=True)
-        self.button.setEnabled(False)
+        self._formatter = compact_json.Formatter(ensure_ascii=False, max_inline_complexity=2, indent_spaces=2)
 
-        compact_json.
-        with tempfile.NamedTemporaryFile("w+") as f:
-            f.write(text)
-            f.seek(0)
-            output = subprocess.run(
-                [
-                    "compact-json",
-                    "--max-compact-list-complexity",
-                    "2",
-                    "-l",
-                    "80",
-                    "--indent",
-                    "2",
-                    "--no-ensure-ascii",
-                    f.name,
-                ],
-                capture_output=True,
-            )
-            print(output)
-        if output.returncode == 0:
-            self.text_edit.setPlainText(output.stdout.decode())
+    def format_text(self) -> None:
+        self.button.setEnabled(False)
+        text = self.text_edit.toPlainText()
+        formatted = self._formatter.serialize(json.loads(text))
+        self.text_edit.setPlainText(formatted)
         self.button.setEnabled(True)
 
 
