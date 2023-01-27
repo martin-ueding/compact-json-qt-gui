@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "compact-json-qt-gui"
+version = "0.1.0"
+description = "Qt GUI for JSON formatting with compact-json"
+authors = ["Martin Ueding <mu@martin-ueding.de>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10,<3.12"
+PySide6 = "^6.4.2"
+compact-json = "^1.5.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
