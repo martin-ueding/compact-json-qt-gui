@@ -41,3 +41,13 @@ But what I really want it some middle ground, and the [`compact-json` library](h
 This project here provides an overly simple Qt 6 GUI around that library and looks like this:
 
 ![screenshot.png](doc/screenshot.png)
+
+# Installation
+
+You can just install it from PyPI:
+
+```
+pip install compact-json-qt-gui
+```
+
+And then start it with `compact-json-qt-gui`.
