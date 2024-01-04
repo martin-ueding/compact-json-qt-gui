@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
     def format_text(self) -> None:
         self.button.setEnabled(False)
         text = self.text_edit.toPlainText()
-        formatted = self._formatter.serialize(json.loads(text))
+        formatted = self._formatter.serialize(json.loads(json.dumps(json.loads(text), sort_keys=True)))
         self.text_edit.setPlainText(formatted)
         self.button.setEnabled(True)
 
